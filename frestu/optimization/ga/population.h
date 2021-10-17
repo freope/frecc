@@ -31,6 +31,7 @@ class Population {
   using Individuals = vector<Individual<Chrom>>;
   using Selecting = function<Int(SelectedItems)>;
 
+  // 個体群の実体。ポインタを通して扱う。
   Individuals inds_1_;
   Individuals inds_2_;
 
@@ -113,7 +114,7 @@ class Population {
     (void)swallow {
       ([&]() {
         auto& typical_gene = get<ixs>(inds[0].chromosome_);
-        Int dimension = typical_gene.dimension();
+        const Int dimension = typical_gene.dimension();
         start_ix_col += dimension;
 
         Int ix_ind = 0;
@@ -227,7 +228,8 @@ public:
   };
 
   template <typename Convertings>
-  void Load(Convertings converts, const string path, const string sep=",") {
+  void Load(
+      const Convertings& converts, const string path, const string sep=",") {
     LoadIndividuals(converts, path, sep, ixs_chrom());
   };
 
