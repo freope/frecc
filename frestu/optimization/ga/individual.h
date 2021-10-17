@@ -59,7 +59,7 @@ class Individual {
 public:
   Chrom chromosome_;
 
-  Individual(Chrom& chromosome, Evaluating& evaluate, Real learning_rate)
+  Individual(Chrom& chromosome, Evaluating& evaluate, Real learning_rate=1.5)
       : evaluate_(evaluate), learning_rate_(learning_rate),
         chromosome_(chromosome) {};
 
