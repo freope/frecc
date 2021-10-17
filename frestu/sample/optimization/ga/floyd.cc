@@ -20,18 +20,18 @@ int main(void) {
   using Real = double;
 
   // パラメータ設定
-  Int kN = 50;
-  Int kPOP_SIZE = 1000;
-  Int kN_ELETES = 3;
-  Int kGEN_MAX = 100000;
-  Int kPATIENCE = 1000;
+  const Int kN = 50;
+  const Int kPOP_SIZE = 1000;
+  const Int kN_ELETES = 3;
+  const Int kGEN_MAX = 100000;
+  const Int kPATIENCE = 1000;
 
   // 遺伝子の設計
   using GeneValues = std::vector<Int>;
   GeneValues candidates {0, 1};
-  bool replacement = true;
-  Int dimension = kN - 1;
-  Real mutate_prob = 0.01;
+  const bool replacement = true;
+  const Int dimension = kN - 1;
+  const Real mutate_prob = 0.01;
   auto gene_selection = GeneDiscrete<GeneValues>(
     candidates, CrossoverUniform<GeneValues>,
     replacement, dimension, mutate_prob);
@@ -52,7 +52,7 @@ int main(void) {
     Real sum_2 = 0;
 
     for (Int i = 0; i < dimension; i++) {
-      Real num = std::sqrt(i + 2);
+      const Real num = std::sqrt(i + 2);
       if (selection[i] == 0) {
         sum_1 += num;
       } else {
@@ -60,12 +60,12 @@ int main(void) {
       }
     }
 
-    Real fitness = -std::abs(sum_1 - sum_2);
+    const Real fitness = -std::abs(sum_1 - sum_2);
     return fitness;
   };
 
   // 個体の設計
-  auto individual_prototype = Individual<Chrom>(chromosome, evaluate, 0);
+  auto individual_prototype = Individual<Chrom>(chromosome, evaluate);
 
   // 集合の設計
   using SelectingType = std::vector<Real>;
@@ -77,10 +77,10 @@ int main(void) {
   Int best_gen = 0;
   Int i_gen = 0;
 
-  population.Evaluate();
+  population.Evaluate("_OpenMP");
   Real best_fitness = (*(population.individuals_))[0].fitness();
 
-  auto t_0 = std::chrono::high_resolution_clock::now();
+  const auto t_0 = std::chrono::high_resolution_clock::now();
   std::cout << "GENERATION: " << i_gen << std::endl;
   std::cout << "BEST_FITNESS: " << best_fitness << std::endl;
 
@@ -88,7 +88,7 @@ int main(void) {
   for (Int i_gen = 0; i_gen < kGEN_MAX; i_gen++) {
     population.Alternate();
     population.Mutate();
-    population.Evaluate();
+    population.Evaluate("_OpenMP");
     population.Reshuffle(kPOP_SIZE/2);
 
     Real best_generation_fitness = (*(population.individuals_))[0].fitness();
@@ -108,6 +108,5 @@ int main(void) {
     }
   }
 
-  std::cout << "Hoge" << std::endl;
   return 0;
 }
