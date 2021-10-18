@@ -1,6 +1,7 @@
 #include <chrono>
 #include <functional>
 #include <iostream>
+#include <Eigen/Dense>
 #include "frestu/optimization/ga/population.h"
 #include "frestu/optimization/ga/individual.h"
 #include "frestu/optimization/ga/gene/gene_discrete.h"
@@ -9,6 +10,10 @@
 
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
+using Eigen::VectorXi;
+using Eigen::VectorXd;
+using Eigen::sqrt;
+using Eigen::Select;
 using frestu::optimization::ga::Population;
 using frestu::optimization::ga::Individual;
 using frestu::optimization::ga::gene::GeneDiscrete;
@@ -27,8 +32,9 @@ int main(void) {
   const Int kPATIENCE = 1000;
 
   // 遺伝子の設計
-  using GeneValues = std::vector<Int>;
-  GeneValues candidates {0, 1};
+  using GeneValues = VectorXi;
+  GeneValues candidates(2);
+  candidates << 0, 1;
   const bool replacement = true;
   const Int dimension = kN - 1;
   const Real mutate_prob = 0.01;
@@ -51,14 +57,11 @@ int main(void) {
     Real sum_1 = 1;
     Real sum_2 = 0;
 
-    for (Int i = 0; i < dimension; i++) {
-      const Real num = std::sqrt(i + 2);
-      if (selection[i] == 0) {
-        sum_1 += num;
-      } else {
-        sum_2 += num;
-      }
-    }
+    auto values_true = sqrt(VectorXd::LinSpaced(dimension, 2, kN).array());
+    auto values_false = VectorXd::Zero(dimension);
+    
+    sum_1 += Select(selection.array() == 0, values_true, values_false).sum();
+    sum_2 += Select(selection.array() == 1, values_true, values_false).sum();
 
     const Real fitness = -std::abs(sum_1 - sum_2);
     return fitness;
