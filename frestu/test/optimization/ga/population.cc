@@ -68,16 +68,18 @@ auto individual_prototype = Individual<Chrom>(
   chromosome, evaluate, learning_rate);
 
 TEST(Population, Create) {
-  auto population = Population<Chrom, vector<double>>::Create(
-    individual_prototype, SelectRanking<vector<double>>, 100, 3);
+  using Fitnesses = vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, 100, 3);
   EXPECT_EQ(population.individuals_->size(), 100);
 }
 
 TEST(Population, Alternate) {
   int pop_size = 100;
   int n_eletes = 10;
-  auto population = Population<Chrom, vector<double>>::Create(
-    individual_prototype, SelectRanking<vector<double>>, pop_size, n_eletes);
+  using Fitnesses = vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, pop_size, n_eletes);
   population.Realize();
   population.Evaluate();
 
@@ -100,8 +102,9 @@ TEST(Population, Alternate) {
 
 TEST(Population, Mutate) {
   int pop_size = 100;
-  auto population = Population<Chrom, vector<double>>::Create(
-    individual_prototype, SelectRanking<vector<double>>, pop_size, 1);
+  using Fitnesses = vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, pop_size, 1);
   population.Realize();
   // 実行できることだけ確認
   population.Mutate();
@@ -109,8 +112,9 @@ TEST(Population, Mutate) {
 
 TEST(Population, Realize) {
   int pop_size = 2;
-  auto population = Population<Chrom, vector<double>>::Create(
-    individual_prototype, SelectRanking<vector<double>>, pop_size, 1);
+  using Fitnesses = vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, pop_size, 1);
   auto& inds = *(population.individuals_);
 
   // Realize 前
@@ -132,8 +136,9 @@ TEST(Population, Realize) {
 
 TEST(Population, Reshuffle) {
   int pop_size = 100;
-  auto population = Population<Chrom, vector<double>>::Create(
-    individual_prototype, SelectRanking<vector<double>>, pop_size, 1);
+  using Fitnesses = vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, pop_size, 1);
   population.Realize();
   population.Evaluate();
   // 実行できることだけ確認
@@ -142,8 +147,9 @@ TEST(Population, Reshuffle) {
 
 TEST(Population, Evaluate) {
   int pop_size = 100;
-  auto population = Population<Chrom, vector<double>>::Create(
-    individual_prototype, SelectRanking<vector<double>>, pop_size, 1);
+  using Fitnesses = vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, pop_size, 1);
   population.Realize();
   // 評価の前に参照を取得しておく
   auto& inds = *(population.individuals_);
@@ -168,8 +174,9 @@ TEST(Population, Evaluate) {
 
 TEST(Population, Save) {
   int pop_size = 100;
-  auto population = Population<Chrom, vector<double>>::Create(
-    individual_prototype, SelectRanking<vector<double>>, pop_size, 1);
+  using Fitnesses = vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, pop_size, 1);
   population.Realize();
   population.Evaluate();
   // 動作確認のみ
@@ -178,8 +185,9 @@ TEST(Population, Save) {
 
 TEST(Population, Load) {
   int pop_size = 100;
-  auto population = Population<Chrom, vector<double>>::Create(
-    individual_prototype, SelectRanking<vector<double>>, pop_size, 1);
+  using Fitnesses = vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, pop_size, 1);
   population.Realize();
   auto& individuals = *(population.individuals_);
 

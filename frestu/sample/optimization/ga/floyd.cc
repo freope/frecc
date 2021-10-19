@@ -68,9 +68,9 @@ int main(void) {
   auto individual_prototype = Individual<Chrom>(chromosome, evaluate);
 
   // 集合の設計
-  using SelectingType = std::vector<Real>;
-  auto population = Population<Chrom, SelectingType>::Create(
-    individual_prototype, SelectRanking<SelectingType>, kPOP_SIZE, kN_ELETES);
+  using Fitnesses = std::vector<double>;
+  auto population = Population<Chrom, Fitnesses>::Create(
+    individual_prototype, SelectRanking<Fitnesses>, kPOP_SIZE, kN_ELETES);
   population.Realize();
 
   // 第 0 世代の計算

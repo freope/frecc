@@ -4,7 +4,6 @@
 #include <fstream>
 #include <functional>
 #include <regex>
-#include <typeinfo>
 #include <vector>
 #include "frestu/optimization/ga/individual.h"
 
@@ -24,12 +23,12 @@ using std::sort;
 using std::vector;
 using frestu::optimization::ga::Individual;
 
-template <typename Chrom, typename SelectedItems>
+template <typename Chrom, typename Fitnesses>
 class Population {
   static constexpr size_t size_chrom = std::tuple_size<Chrom>::value;
   using ixs_chrom = make_index_sequence<size_chrom>;
   using Individuals = vector<Individual<Chrom>>;
-  using Selecting = function<Int(SelectedItems)>;
+  using Selecting = function<Int(Fitnesses)>;
 
   // 個体群の実体。ポインタを通して扱う。
   Individuals inds_1_;
@@ -123,15 +122,16 @@ class Population {
         while (getline(infile, line)) {
           sregex_token_iterator it(line.begin(), line.end(), rx, -1);
           sregex_token_iterator end;
+
           // 列位置の初期化
-          for (Int i = 2; i < start_ix_col; i++) {
-            it++;
-          }
+          for (Int i = 2; i < start_ix_col; i++) it++;
+
           // dim のループ
           for (Int ix_dim = 0; ix_dim < dimension; ix_dim++) {
             auto& gene = get<ixs>(inds[ix_ind].chromosome_);
             gene.values_[ix_dim] = get<ixs>(converts)(*(it++));
           }
+          
           ix_ind++;
         }
         // NOTE: infile.seekg(0); でファイルの先頭に行けんの？
@@ -163,7 +163,7 @@ public:
     }
 
     // 選択に用いる適応度
-    vector<Real> fitnesses(pop_size_);
+    Fitnesses fitnesses(pop_size_);
     for (Int i = 0; i < pop_size_; i++) {
       fitnesses[i] = inds[i].fitness();
     }
