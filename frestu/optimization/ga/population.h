@@ -14,19 +14,23 @@ using Real = double;
 
 using std::endl;
 using std::function;
+using std::get;
+using std::index_sequence;
+using std::make_index_sequence;
 using std::ios_base;
 using std::ifstream;
 using std::ofstream;
 using std::regex;
 using std::sregex_token_iterator;
 using std::sort;
+using std::tuple_size;
 using std::vector;
 using frestu::optimization::ga::Individual;
 
 template <typename Chrom, typename Fitnesses>
 class Population {
-  static constexpr size_t size_chrom = std::tuple_size<Chrom>::value;
-  using ixs_chrom = make_index_sequence<size_chrom>;
+  static constexpr size_t size_chrom_ = tuple_size<Chrom>::value;
+  using ixs_chrom = make_index_sequence<size_chrom_>;
   using Individuals = vector<Individual<Chrom>>;
   using Selecting = function<Int(Fitnesses)>;
 
@@ -77,15 +81,17 @@ class Population {
     for (const auto& ind : *individuals_) {
       using swallow = int[];
       (void)swallow {
-        ([&](){
-          // gene 間と values_ 間の区別なくつなげる。
-          auto gene = get<ixs>(ind.chromosome_);
-          for (const auto& value : gene.values_) {              
-            outfile << value;
-            outfile << sep;
-          }
-        }(),
-        0)...
+        (
+          [&](){
+            // gene 間と values_ 間の区別なくつなげる。
+            auto gene = get<ixs>(ind.chromosome_);
+            for (const auto& value : gene.values_) {
+              outfile << value;
+              outfile << sep;
+            }
+          }(),
+          0
+        )...
       };
       // 最後の列に、個体の適応度を記録。
       outfile << ind.fitness();
@@ -111,37 +117,40 @@ class Population {
     // ixs のループ
     using swallow = int[];
     (void)swallow {
-      ([&]() {
-        auto& typical_gene = get<ixs>(inds[0].chromosome_);
-        const Int dimension = typical_gene.dimension();
-        start_ix_col += dimension;
+      (
+        [&]() {
+          auto& typical_gene = get<ixs>(inds[0].chromosome_);
+          const Int dimension = typical_gene.dimension();
+          start_ix_col += dimension;
 
-        Int ix_ind = 0;
-        ifstream infile(path);
-        // 行のループ
-        while (getline(infile, line)) {
-          sregex_token_iterator it(line.begin(), line.end(), rx, -1);
-          sregex_token_iterator end;
+          Int ix_ind = 0;
+          ifstream infile(path);
+          // 行のループ
+          while (getline(infile, line)) {
+            sregex_token_iterator it(line.begin(), line.end(), rx, -1);
+            sregex_token_iterator end;
 
-          // 列位置の初期化
-          for (Int i = 2; i < start_ix_col; i++) it++;
+            // 列位置の初期化
+            for (Int i = 2; i < start_ix_col; i++) it++;
 
-          // dim のループ
-          for (Int ix_dim = 0; ix_dim < dimension; ix_dim++) {
-            auto& gene = get<ixs>(inds[ix_ind].chromosome_);
-            gene.values_[ix_dim] = get<ixs>(converts)(*(it++));
+            // dim のループ
+            for (Int ix_dim = 0; ix_dim < dimension; ix_dim++) {
+              auto& gene = get<ixs>(inds[ix_ind].chromosome_);
+              gene.values_[ix_dim] = get<ixs>(converts)(*(it++));
+            }
+
+            ix_ind++;
           }
-          
-          ix_ind++;
-        }
-        // NOTE: infile.seekg(0); でファイルの先頭に行けんの？
-        infile.close();
-      }(),
-      0)...
+          // NOTE: infile.seekg(0); でファイルの先頭に行けんの？
+          infile.close();
+        }(),
+        0
+      )...
     };
   };
 
 public:
+  // HACK: vector を指すアドレスなので、デストラクタは不要でOK?
   Individuals* individuals_;
 
   Population(

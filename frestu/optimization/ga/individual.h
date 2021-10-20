@@ -23,8 +23,8 @@ using frestu::util::iteration::tuple::Apply;
 
 template <typename Chrom>
 class Individual {
-  static constexpr size_t size_chrom = std::tuple_size<Chrom>::value;
-  using ixs_chrom = make_index_sequence<size_chrom>;
+  static constexpr size_t size_chrom_ = tuple_size<Chrom>::value;
+  using ixs_chrom = make_index_sequence<size_chrom_>;
   using Evaluating = function<Real(Chrom)>;
 
   const Evaluating evaluate_;
