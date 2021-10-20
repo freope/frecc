@@ -1,6 +1,8 @@
 CC = g++
 OPTIONS = -std=c++17 -Wall -I ../.. -pthread -fopenmp -lgtest_main -lgtest
 SUITES = \
+data_type/data_frame/data_frame.out \
+feature_extraction/time_series/extractor_ma_std.out \
 optimization/ga/crossover.out \
 optimization/ga/individual.out \
 optimization/ga/population.out \
@@ -12,10 +14,27 @@ util/generation/number/random/linear.out \
 util/generation/number/random/logscale.out \
 util/generation/number/sequential/linear.out \
 util/generation/number/sequential/logscale.out \
+util/io/table_reader.out \
 util/iteration/tuple/application.out \
-util/sampling.out
+util/sampling.out \
+practice.out
 
 all: $(SUITES)
+TARGETS = \
+feature_extraction/time_series/extractor_ma_std.cc \
+../feature_extraction/time_series/extractor_ma_std.h \
+../util/io/table_reader.h \
+../util/io/table_reader.cc
+feature_extraction/time_series/extractor_ma_std.out: $(TARGETS)
+	$(CC) -o $@ $^ $(OPTIONS)
+
+TARGETS = \
+data_type/data_frame/data_frame.cc \
+../data_type/data_frame/data_frame.h \
+../util/io/table_reader.h \
+../util/io/table_reader.cc
+data_type/data_frame/data_frame.out: $(TARGETS)
+	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 optimization/ga/crossover.cc \
@@ -125,6 +144,13 @@ util/generation/number/sequential/logscale.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
+util/io/table_reader.cc \
+../util/io/table_reader.h \
+../util/io/table_reader.cc
+util/io/table_reader.out: $(TARGETS)
+	$(CC) -o $@ $^ $(OPTIONS)
+
+TARGETS = \
 util/iteration/tuple/application.cc \
 ../util/iteration/tuple/application.h
 util/iteration/tuple/application.out: $(TARGETS)
@@ -136,6 +162,13 @@ util/sampling.cc \
 ../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc
 util/sampling.out: $(TARGETS)
+	$(CC) -o $@ $^ $(OPTIONS)
+
+TARGETS = \
+practice.cc \
+../util/io/table_reader.h \
+../util/io/table_reader.cc
+practice.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 .cc.out:
