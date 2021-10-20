@@ -13,17 +13,12 @@ using Int = int;
 using Real = double;
 
 using std::endl;
-using std::function;
-using std::get;
-using std::index_sequence;
-using std::make_index_sequence;
 using std::ios_base;
 using std::ifstream;
 using std::ofstream;
 using std::regex;
 using std::sregex_token_iterator;
 using std::sort;
-using std::tuple_size;
 using std::vector;
 using frestu::optimization::ga::Individual;
 
