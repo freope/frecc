@@ -57,7 +57,7 @@ int main(void) {
     Real sum_1 = 1;
     Real sum_2 = 0;
 
-    auto values_true = sqrt(VectorXd::LinSpaced(dimension, 2, kN).array());
+    auto values_true = VectorXd::LinSpaced(dimension, 2, kN).cwiseSqrt();
     auto values_false = VectorXd::Zero(dimension);
     
     sum_1 += Select(selection.array() == 0, values_true, values_false).sum();
