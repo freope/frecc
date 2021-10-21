@@ -5,11 +5,10 @@
 
 namespace frestu::feature_extraction::time_series {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using Eigen::Dynamic;
 using Eigen::Matrix;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 class ExtractorSstd {
   const Int window_;

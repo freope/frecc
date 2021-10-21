@@ -8,11 +8,10 @@
 
 namespace frestu::util::sampling {
 
-using Int = frestu::data_type::Int;
-
 using std::mt19937;
 using std::random_device;
 using std::runtime_error;
+using frestu::data_type::Int;
 using frestu::util::generation::number::random::linear::GenerateUniform;
 
 // 非決定的な乱数生成器

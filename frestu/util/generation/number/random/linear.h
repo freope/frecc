@@ -5,12 +5,11 @@
 
 namespace frestu::util::generation::number::random::linear {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::random_device;
 using std::mt19937;
 using std::uniform_int_distribution;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 Int GenerateUniform(const Int minimum, const Int maximum);
 

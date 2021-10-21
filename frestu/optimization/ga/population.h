@@ -10,9 +10,6 @@
 
 namespace frestu::optimization::ga {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::endl;
 using std::ios_base;
 using std::ifstream;
@@ -21,6 +18,8 @@ using std::regex;
 using std::sregex_token_iterator;
 using std::sort;
 using std::vector;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::optimization::ga::Individual;
 
 template <typename Chrom, typename Fitnesses>

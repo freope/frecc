@@ -6,11 +6,10 @@
 
 namespace {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::vector;
 using Eigen::VectorXd;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 TEST(Crossover, CrossoverNPoint) {
   using namespace frestu::optimization::ga::crossover;

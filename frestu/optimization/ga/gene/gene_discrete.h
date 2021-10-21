@@ -8,13 +8,12 @@
 
 namespace frestu::optimization::ga::gene {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::function;
 using std::mt19937;
 using std::random_device;
 using std::vector;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::optimization::ga::gene::GeneAbstract;
 using frestu::util::generation::number::random::linear::GenerateUniform;
 using frestu::util::sampling::Sample;

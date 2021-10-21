@@ -8,10 +8,9 @@
 
 namespace frestu::optimization::ga::selection {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::runtime_error;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::util::generation::number::random::linear::GenerateUniform;
 
 /**

@@ -5,10 +5,9 @@
 
 namespace frestu::feature_extraction::time_series {
 
-using Int = frestu::data_type::Int;
-
 using Eigen::Dynamic;
 using Eigen::Matrix;
+using frestu::data_type::Int;
 
 class ExtractorSma {
   const Int window_;

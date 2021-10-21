@@ -1,13 +1,11 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include "gtest/gtest.h"
+#include "frestu/data_type/data_frame/data_frame.h"
 #include "frestu/feature_extraction/time_series/extractor_sma.h"
 #include "frestu/util/io/table_reader.h"
-#include "frestu/data_type/data_frame/data_frame.h"
 
 namespace {
-
-using Real = double;
 
 using std::cout;
 using std::endl;
@@ -15,6 +13,7 @@ using std::get;
 using std::make_tuple;
 using Eigen::Map;
 using Eigen::VectorXd;
+using frestu::data_type::Real;
 using frestu::data_type::data_frame::DataFrame;
 using frestu::feature_extraction::time_series::ExtractorSma;
 using frestu::util::io::TableReader;

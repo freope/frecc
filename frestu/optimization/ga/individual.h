@@ -9,9 +9,6 @@
 
 namespace frestu::optimization::ga {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::function;
 using std::get;
 using std::index_sequence;
@@ -19,6 +16,8 @@ using std::make_index_sequence;
 using std::string;
 using std::tuple_size;
 using std::unordered_map;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::optimization::ga::gene::GeneAbstract;
 using frestu::util::iteration::tuple::Apply;
 

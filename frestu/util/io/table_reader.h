@@ -9,14 +9,13 @@
 
 namespace frestu::util::io {
 
-using Int = frestu::data_type::Int;
-
 using std::function;
 using std::ifstream;
 using std::regex;
 using std::sregex_token_iterator;
 using std::string;
 using std::vector;
+using frestu::data_type::Int;
 
 class TableReader {
   const string path_;

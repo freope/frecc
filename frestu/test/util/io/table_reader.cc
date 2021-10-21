@@ -8,15 +8,14 @@
 
 namespace {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::cout;
 using std::endl;
 using std::ifstream;
 using std::string;
 using std::tuple;
 using std::vector;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::util::io::TableReader;
 
 TEST(TableReader, n_rows) {

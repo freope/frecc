@@ -5,9 +5,6 @@
 
 namespace {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::cout;
 using std::endl;
 using std::get;
@@ -15,6 +12,8 @@ using std::make_index_sequence;
 using std::make_tuple;
 using std::tuple;
 using std::tuple_size;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::util::iteration::tuple::Apply;
 
 TEST(Application, Apply_F_T) {

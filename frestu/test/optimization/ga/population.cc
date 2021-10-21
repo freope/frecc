@@ -11,9 +11,6 @@
 
 namespace {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::cout;
 using std::endl;
 using std::get;
@@ -26,6 +23,8 @@ using std::tuple;
 using std::tuple_size;
 using std::unordered_map;
 using std::vector;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::optimization::ga::Population;
 using frestu::optimization::ga::Individual;
 using frestu::optimization::ga::gene::GeneDiscrete;

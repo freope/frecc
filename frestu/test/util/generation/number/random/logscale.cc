@@ -6,11 +6,10 @@
 
 namespace {
 
-using Real = frestu::data_type::Real;
-
 using std::cout;
 using std::endl;
 using std::vector;
+using frestu::data_type::Real;
 
 TEST(Logscale, GenerateUniform_Real_Real) {
   using namespace frestu::util::generation::number::random::logscale;

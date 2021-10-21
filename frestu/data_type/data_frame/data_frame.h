@@ -9,8 +9,6 @@
 
 namespace frestu::data_type::data_frame {
 
-using Int = frestu::data_type::Int;
-
 using std::get;
 using std::index_sequence;
 using std::make_index_sequence;
@@ -19,6 +17,7 @@ using std::tuple_size;
 using Eigen::Dynamic;
 using Eigen::Matrix;
 using Eigen::Vector;
+using frestu::data_type::Int;
 
 template <typename DfColumns>
 class DataFrame {

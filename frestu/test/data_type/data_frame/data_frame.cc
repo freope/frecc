@@ -8,9 +8,6 @@
 
 namespace {
 
-using Int = int;
-using Real = double;
-
 using std::cout;
 using std::endl;
 using std::get;
@@ -24,6 +21,8 @@ using Eigen::Matrix;
 using Eigen::MatrixXd;
 using Eigen::VectorXi;
 using Eigen::VectorXd;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::data_type::data_frame::DataFrame;
 using frestu::util::io::TableReader;
 

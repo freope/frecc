@@ -8,12 +8,11 @@
 
 namespace frestu::optimization::ga::gene {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::string;
 using std::unordered_map;
 using std::vector;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 using frestu::optimization::ga::gene::GeneAbstract;
 namespace rlin = frestu::util::generation::number::random::linear;
 namespace slin = frestu::util::generation::number::sequential::linear;

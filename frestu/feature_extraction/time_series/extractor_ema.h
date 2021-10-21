@@ -5,12 +5,11 @@
 
 namespace frestu::feature_extraction::time_series {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::get;
 using Eigen::Dynamic;
 using Eigen::Matrix;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 class ExtractorEma {
   static const Int rolling_window_ = 1;

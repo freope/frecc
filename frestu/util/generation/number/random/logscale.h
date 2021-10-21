@@ -5,12 +5,11 @@
 
 namespace frestu::util::generation::number::random::logscale {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::random_device;
 using std::mt19937;
 using std::uniform_int_distribution;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 Real GenerateUniform(const Real minimum, const Real miximum);
 

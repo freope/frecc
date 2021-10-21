@@ -6,12 +6,11 @@
 
 namespace {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::cout;
 using std::endl;
 using std::vector;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 TEST(Selection, SelectRoulette) {
   using namespace frestu::optimization::ga::selection;

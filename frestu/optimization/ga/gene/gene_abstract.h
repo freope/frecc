@@ -6,11 +6,10 @@
 
 namespace frestu::optimization::ga::gene {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
-
 using std::string;
 using std::unordered_map;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 template <typename GeneValues>
 class GeneAbstract {

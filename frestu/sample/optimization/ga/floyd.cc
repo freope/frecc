@@ -17,8 +17,8 @@ using frestu::optimization::ga::crossover::CrossoverUniform;
 using frestu::optimization::ga::selection::SelectRanking;
 
 int main(void) {
-  using Int = frestu::data_type::Int;
-  using Real = frestu::data_type::Real;
+  using frestu::data_type::Int;
+  using frestu::data_type::Real;
 
   // パラメータ設定
   const Int kN = 50;

@@ -7,11 +7,10 @@
 
 namespace {
 
-using Int = frestu::data_type::Int;
-
 using std::cout;
 using std::endl;
 using std::vector;
+using frestu::data_type::Int;
 
 TEST(Generation, GenerationStep_Int_Int_Int) {
   using namespace frestu::util::generation::number::sequential::logscale;

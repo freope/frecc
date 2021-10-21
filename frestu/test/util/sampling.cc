@@ -8,11 +8,10 @@
 
 namespace {
 
-using Int = frestu::data_type::Int;
-
 using std::find;
 using std::vector;
 using Eigen::VectorXi;
+using frestu::data_type::Int;
 
 TEST(Sampling, SampleWithoutReplacement) {
   using namespace frestu::util::sampling;

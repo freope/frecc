@@ -5,8 +5,8 @@
 
 namespace frestu::util::generation::number::sequential::logscale {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 /**
  * @fn Vec GenerateStep(const Real minimum, const Real maximum, const Real log_step=1)

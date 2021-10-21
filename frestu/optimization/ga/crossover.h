@@ -8,12 +8,11 @@
 
 namespace frestu::optimization::ga::crossover {
 
-using Int = frestu::data_type::Int;
-
 using std::min;
 using std::runtime_error;
 using std::to_string;
 using std::vector;
+using frestu::data_type::Int;
 using frestu::util::sampling::Sample;
 using frestu::util::sampling::SampleWithoutReplacement;
 

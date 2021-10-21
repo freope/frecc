@@ -4,8 +4,8 @@
 
 namespace frestu::util::generation::number::sequential::linear {
 
-using Int = frestu::data_type::Int;
-using Real = frestu::data_type::Real;
+using frestu::data_type::Int;
+using frestu::data_type::Real;
 
 /**
  * @fn Vec GenerateStep(const Int minimum, const Int maximum, const Int step=1)
