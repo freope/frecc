@@ -148,6 +148,9 @@ public:
   // HACK: vector を指すアドレスなので、デストラクタは不要でOK?
   Individuals* individuals_;
 
+  /**
+   * @param[in] select const を付けないとエラー
+   */
   Population(
       Individuals& inds, const Selecting& select, Int n_eletes)
       : inds_1_(inds), inds_2_(inds),
