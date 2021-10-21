@@ -5,12 +5,13 @@
 #include <functional>
 #include <regex>
 #include <vector>
+#include "frestu/data_type/data_type.h"
 #include "frestu/optimization/ga/individual.h"
 
 namespace frestu::optimization::ga {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::endl;
 using std::ios_base;

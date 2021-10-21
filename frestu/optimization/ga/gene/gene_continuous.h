@@ -1,14 +1,15 @@
 #pragma once
 
 #include <vector>
+#include "frestu/data_type/data_type.h"
 #include "frestu/optimization/ga/gene/gene_abstract.h"
 #include "frestu/util/generation/number/random/linear.h"
 #include "frestu/util/generation/number/sequential/linear.h"
 
 namespace frestu::optimization::ga::gene {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::string;
 using std::unordered_map;

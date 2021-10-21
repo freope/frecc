@@ -3,11 +3,12 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
+#include "frestu/data_type/data_type.h"
 #include "frestu/util/sampling.h"
 
 namespace frestu::optimization::ga::crossover {
 
-using Int = int;
+using Int = frestu::data_type::Int;
 
 using std::min;
 using std::runtime_error;

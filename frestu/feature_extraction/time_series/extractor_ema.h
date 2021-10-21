@@ -1,11 +1,12 @@
 #pragma once
 
 #include <Eigen/Dense>
+#include "frestu/data_type/data_type.h"
 
 namespace frestu::feature_extraction::time_series {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::get;
 using Eigen::Dynamic;
@@ -31,7 +32,7 @@ public:
     initial_values(0, 0) = get<0>(df.columns_)(0);
 
     const auto ma = df.template RollRecursion<FnRet>(
-      [&alpha](const auto& b, const auto& r){
+      [&alpha](const auto& b, const auto& r) {
         return r(0, 0) + alpha * (b(0, 0) - r(0, 0));
       },
       rolling_window_, rolling_window_recursive_, initial_values

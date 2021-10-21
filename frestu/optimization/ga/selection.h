@@ -3,12 +3,13 @@
 #include <algorithm>
 #include <iostream>
 #include <numeric>
+#include "frestu/data_type/data_type.h"
 #include "frestu/util/generation/number/random/linear.h"
 
 namespace frestu::optimization::ga::selection {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::runtime_error;
 using frestu::util::generation::number::random::linear::GenerateUniform;
@@ -42,7 +43,7 @@ Int SelectRoulette(Vec items) {
 
   // 降順に並び替え
   sort(items_scaled.begin(), items_scaled.end(),
-       [](auto lhs, auto rhs) ->bool { return rhs < lhs; });
+       [](auto lhs, auto rhs) -> bool { return rhs < lhs; });
 
   Int ix_selected = 0;
   Real r = GenerateUniform(0.0, 1.0);

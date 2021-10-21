@@ -1,8 +1,12 @@
 #include <iostream>
 #include "gtest/gtest.h"
+#include "frestu/data_type/data_type.h"
 #include "frestu/util/iteration/tuple/application.h"
 
 namespace {
+
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::cout;
 using std::endl;
@@ -27,7 +31,7 @@ TEST(Application, R_Apply_F_T) {
   auto f = [](auto t){
     return t + 1;
   };
-  auto rv = Apply<tuple<int, double>>(f, tpl, make_index_sequence<size>());
+  auto rv = Apply<tuple<Int, Real>>(f, tpl, make_index_sequence<size>());
   EXPECT_EQ(get<0>(rv), 2);
   EXPECT_NEAR(get<1>(rv), 2.2, 0.1);
 }

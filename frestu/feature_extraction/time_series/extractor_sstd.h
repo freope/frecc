@@ -1,11 +1,12 @@
 #pragma once
 
 #include <Eigen/Dense>
+#include "frestu/data_type/data_type.h"
 
 namespace frestu::feature_extraction::time_series {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using Eigen::Dynamic;
 using Eigen::Matrix;
@@ -22,7 +23,7 @@ public:
     const Real denominator = static_cast<Real>(window_ - 1);
 
     const auto std = df.template Roll<FnRet>(
-      [denominator](const auto& b){
+      [denominator](const auto& b) {
         const auto x = (b.array() - b.mean()).matrix();
         const auto y = (x.transpose() * x).array();
         const auto z = (y / denominator).sqrt();

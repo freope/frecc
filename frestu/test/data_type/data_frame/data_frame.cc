@@ -29,11 +29,11 @@ using frestu::util::io::TableReader;
 
 auto tr = TableReader("./data/ts.dat");
 // time
-auto indices = tr.ReadColumn<string>(0, [](auto v){return v;});
-auto value_i = tr.ReadColumn<Int>(1, [](auto v){return stoi(v);});
+auto indices = tr.ReadColumn<string>(0, [](auto v) { return v; });
+auto value_i = tr.ReadColumn<Int>(1, [](auto v) { return stoi(v); });
 
 auto ixs_d = vector<int>{1, 2};
-auto value_d = tr.ReadColumns<Real>(ixs_d, [](auto v){return stod(v);});
+auto value_d = tr.ReadColumns<Real>(ixs_d, [](auto v) { return stod(v); });
 
 VectorXi vec_i = Map<VectorXi>(&value_i[0], value_i.size());
 MatrixXd mat_d = Map<MatrixXd>(&value_d[0], tr.n_rows(), ixs_d.size());
@@ -42,7 +42,7 @@ auto df_columns = make_tuple(vec_i, mat_d);
 auto df = DataFrame(df_columns);
 
 TEST(DataFrame, Apply_Fn) {
-  auto sum_df = df.Apply<Real>([](auto& b){return b.sum();});
+  auto sum_df = df.Apply<Real>([](auto& b) { return b.sum(); });
 
   // vec_i
   EXPECT_NEAR(sum_df[0], 275, 0.01);
@@ -51,10 +51,10 @@ TEST(DataFrame, Apply_Fn) {
 }
 
 TEST(DataFrame, Apply_Fn_Int_Int) {
-  auto sum_1 = df.Apply<Real>([](auto& b){return b.sum();}, 0, 0);
-  auto sum_2 = df.Apply<Real>([](auto& b){return b.sum();}, 0, 1);
-  auto sum_3 = df.Apply<Real>([](auto& b){return b.sum();}, 0, 5);
-  auto sum_4 = df.Apply<Real>([](auto& b){return b.sum();}, 3, 6);
+  auto sum_1 = df.Apply<Real>([](auto& b) { return b.sum(); }, 0, 0);
+  auto sum_2 = df.Apply<Real>([](auto& b) { return b.sum(); }, 0, 1);
+  auto sum_3 = df.Apply<Real>([](auto& b) { return b.sum(); }, 0, 5);
+  auto sum_4 = df.Apply<Real>([](auto& b) { return b.sum(); }, 3, 6);
 
   // vec_i
   EXPECT_NEAR(sum_1[0], 0.0, 0.01);
@@ -70,8 +70,8 @@ TEST(DataFrame, Apply_Fn_Int_Int) {
 }
 
 TEST(DataFrame, Roll) {
-  auto roll_1 = df.Roll<Real>([](auto& b){return b.mean();}, 2);
-  auto roll_2 = df.Roll<Real>([](auto& b){return b.mean();}, 3);
+  auto roll_1 = df.Roll<Real>([](auto& b) { return b.mean(); }, 2);
+  auto roll_2 = df.Roll<Real>([](auto& b) { return b.mean(); }, 3);
 
   // vec_i
   EXPECT_NEAR(roll_1(0, 0), 9999, 0.01);

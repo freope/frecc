@@ -1,11 +1,12 @@
 #pragma once
 
 #include <cmath>
+#include "frestu/data_type/data_type.h"
 
 namespace frestu::util::generation::number::sequential::logscale {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 /**
  * @fn Vec GenerateStep(const Real minimum, const Real maximum, const Real log_step=1)

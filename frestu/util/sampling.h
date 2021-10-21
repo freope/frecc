@@ -3,11 +3,12 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
+#include "frestu/data_type/data_type.h"
 #include "frestu/util/generation/number/random/linear.h"
 
 namespace frestu::util::sampling {
 
-using Int = int;
+using Int = frestu::data_type::Int;
 
 using std::mt19937;
 using std::random_device;

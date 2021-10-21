@@ -21,7 +21,7 @@ using frestu::util::io::TableReader;
 
 TEST(ExtractorSma, Extract) {
   auto tr = TableReader("./data/ts.dat");
-  auto value = tr.ReadColumn<double>(1, [](auto v){return stod(v);});
+  auto value = tr.ReadColumn<double>(1, [](auto v){ return stod(v); });
   VectorXd columns = Map<VectorXd>(&value[0], value.size());
   auto df = DataFrame(make_tuple(columns));
   auto extractor = ExtractorSma(2);

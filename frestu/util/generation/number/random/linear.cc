@@ -2,13 +2,6 @@
 
 namespace frestu::util::generation::number::random::linear {
 
-using Int = int;
-using Real = double;
-
-using std::random_device;
-using std::mt19937;
-using std::uniform_int_distribution;
-
 // 非決定的な乱数生成器
 random_device randomDevise;
 // メルセンヌ・ツイスタの32ビット版、引数は初期シード値

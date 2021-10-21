@@ -2,11 +2,12 @@
 
 #include <string>
 #include <unordered_map>
+#include "frestu/data_type/data_type.h"
 
 namespace frestu::optimization::ga::gene {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::string;
 using std::unordered_map;

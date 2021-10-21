@@ -3,9 +3,12 @@
 #include <vector>
 #include <Eigen/Dense>
 #include "gtest/gtest.h"
+#include "frestu/data_type/data_type.h"
 #include "frestu/util/sampling.h"
 
 namespace {
+
+using Int = frestu::data_type::Int;
 
 using std::find;
 using std::vector;
@@ -15,8 +18,8 @@ TEST(Sampling, SampleWithoutReplacement) {
   using namespace frestu::util::sampling;
 
   // Std Vector
-  vector<int> samples {1, 2, 3};
-  vector<int> selecteds = SampleWithoutReplacement<vector<int>>(samples, 2);
+  vector<Int> samples {1, 2, 3};
+  vector<Int> selecteds = SampleWithoutReplacement<vector<Int>>(samples, 2);
   EXPECT_EQ(selecteds.size(), 2);
   // 選択された要素が 1, 2, 3 のどれか
   for (const auto& sample : selecteds) {
@@ -48,8 +51,8 @@ TEST(Sampling, SampleWithReplacement) {
   using namespace frestu::util::sampling;
 
   // Std Vector
-  vector<int> samples {1, 2, 3};
-  vector<int> selecteds = SampleWithReplacement<vector<int>>(samples, 5);
+  vector<Int> samples {1, 2, 3};
+  vector<Int> selecteds = SampleWithReplacement<vector<Int>>(samples, 5);
   EXPECT_EQ(selecteds.size(), 5);
   // 選択された要素が 1, 2, 3 のどれか
   for (const auto& sample : selecteds) {

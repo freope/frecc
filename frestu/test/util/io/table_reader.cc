@@ -3,9 +3,13 @@
 #include <tuple>
 #include <vector>
 #include "gtest/gtest.h"
+#include "frestu/data_type/data_type.h"
 #include "frestu/util/io/table_reader.h"
 
 namespace {
+
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::cout;
 using std::endl;
@@ -30,8 +34,8 @@ TEST(TableReader, ReadColumn) {
   auto tr = TableReader(path);
 
   auto times = tr.ReadColumn(0);
-  auto values_i = tr.ReadColumn<int>(1, [](auto v){return stoi(v);});
-  auto values_d = tr.ReadColumn<double>(2, [](auto v){return stod(v);});
+  auto values_i = tr.ReadColumn<Int>(1, [](auto v){return stoi(v);});
+  auto values_d = tr.ReadColumn<Real>(2, [](auto v){return stod(v);});
 
   // for (const auto& c : times) {
   //   std::cout << c << std::endl;
@@ -55,8 +59,8 @@ TEST(TableReader, ReadColumns) {
   const string path = "./data/ts.dat";
   auto tr = TableReader(path);
 
-  vector<int> ixs {1, 2};
-  auto values = tr.ReadColumns<double>(ixs, [](auto v){return stod(v);});
+  vector<Int> ixs {1, 2};
+  auto values = tr.ReadColumns<Real>(ixs, [](auto v){return stod(v);});
 
   // for (const auto& c : values_d) {
   //   cout << c << endl;

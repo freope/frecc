@@ -1,6 +1,7 @@
 #include <chrono>
 #include <functional>
 #include <iostream>
+#include "frestu/data_type/data_type.h"
 #include "frestu/optimization/ga/population.h"
 #include "frestu/optimization/ga/individual.h"
 #include "frestu/optimization/ga/gene/gene_discrete.h"
@@ -16,8 +17,8 @@ using frestu::optimization::ga::crossover::CrossoverUniform;
 using frestu::optimization::ga::selection::SelectRanking;
 
 int main(void) {
-  using Int = int;
-  using Real = double;
+  using Int = frestu::data_type::Int;
+  using Real = frestu::data_type::Real;
 
   // パラメータ設定
   const Int kN = 50;

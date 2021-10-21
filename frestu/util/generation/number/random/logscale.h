@@ -1,11 +1,16 @@
 #pragma once
 
 #include <random>
+#include "frestu/data_type/data_type.h"
 
 namespace frestu::util::generation::number::random::logscale {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
+
+using std::random_device;
+using std::mt19937;
+using std::uniform_int_distribution;
 
 Real GenerateUniform(const Real minimum, const Real miximum);
 

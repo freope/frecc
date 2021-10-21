@@ -5,10 +5,11 @@
 #include <regex>
 #include <string>
 #include <vector>
+#include "frestu/data_type/data_type.h"
 
 namespace frestu::util::io {
 
-using Int = int;
+using Int = frestu::data_type::Int;
 
 using std::function;
 using std::ifstream;

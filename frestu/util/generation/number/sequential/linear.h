@@ -1,9 +1,11 @@
 #pragma once
 
+#include "frestu/data_type/data_type.h"
+
 namespace frestu::util::generation::number::sequential::linear {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 /**
  * @fn Vec GenerateStep(const Int minimum, const Int maximum, const Int step=1)

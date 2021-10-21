@@ -3,7 +3,7 @@
 namespace frestu::util::io {
 
 TableReader::TableReader(const string path, const bool header, const string sep)
-    : path_(path), header_(header), rx_(sep){
+    : path_(path), header_(header), rx_(sep) {
   string line;
   ifstream infile(path_);
 

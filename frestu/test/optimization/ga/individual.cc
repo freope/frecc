@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <vector>
 #include "gtest/gtest.h"
+#include "frestu/data_type/data_type.h"
 #include "frestu/optimization/ga/individual.h"
 #include "frestu/optimization/ga/gene/gene_discrete.h"
 #include "frestu/optimization/ga/gene/gene_continuous.h"
@@ -10,6 +11,9 @@
 #include "frestu/optimization/ga/crossover.h"
 
 namespace {
+
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::cout;
 using std::endl;
@@ -32,37 +36,37 @@ using frestu::optimization::ga::crossover::CrossoverUniform;
 // Discrete
 using vs = vector<string>;
 vs candidates {"rbf", "poly", "linear"};
-int dimension_d = 1;
-double mutate_probability_d = 0.5;
+Int dimension_d = 1;
+Real mutate_probability_d = 0.5;
 auto gene_d = GeneDiscrete<vs>(
   candidates, CrossoverUniform<vs>, false, dimension_d, mutate_probability_d);
 
 // Continuous
-double minimum_c = 0.0;
-double maximum_c = 1.0;
+Real minimum_c = 0.0;
+Real maximum_c = 1.0;
 bool random_realization_c = true;
-int dimension_c = 2;
-double mutate_probability_c = 0.5;
-auto gene_c = GeneContinuous<vector<double>, double>(
+Int dimension_c = 2;
+Real mutate_probability_c = 0.5;
+auto gene_c = GeneContinuous<vector<Real>, Real>(
   minimum_c, maximum_c, random_realization_c,
   dimension_c, mutate_probability_c);
 
 // Continuous Logscale
-double minimum_cl = 0.1;
-double maximum_cl = 10.0;
+Real minimum_cl = 0.1;
+Real maximum_cl = 10.0;
 bool random_realization_cl = true;
-int dimension_cl = 2;
-double mutate_probability_cl = 0.5;
-auto gene_cl = GeneContinuousLogscale<vector<double>, double>(
+Int dimension_cl = 2;
+Real mutate_probability_cl = 0.5;
+auto gene_cl = GeneContinuousLogscale<vector<Real>, Real>(
   minimum_cl, maximum_cl, random_realization_cl,
   dimension_cl, mutate_probability_cl);
 
 auto chromosome = make_tuple(gene_d, gene_c, gene_cl);
 using Chrom = decltype(chromosome);
-function<double(Chrom)> evaluate = [](Chrom chrom) {
+function<Real(Chrom)> evaluate = [](Chrom chrom) {
   return 1.0;
 };
-double learning_rate = 1.5;
+Real learning_rate = 1.5;
 auto individual = Individual<Chrom>(chromosome, evaluate, learning_rate);
 
 TEST(Individual, Realize) {
@@ -137,18 +141,18 @@ TEST(Individual, Crossover) {
   auto gd = GeneDiscrete<vs>(candidates, CrossoverUniform<vs>, false, 1, 0.01);
 
   // Continuous
-  auto gc = GeneContinuous<vector<double>, double>(0.0, 1.0, true, 1, 0.01);
+  auto gc = GeneContinuous<vector<Real>, Real>(0.0, 1.0, true, 1, 0.01);
 
   // Continuous Logscale
-  auto gcl = GeneContinuousLogscale<vector<double>, double>(
+  auto gcl = GeneContinuousLogscale<vector<Real>, Real>(
     0.1, 10.0, true, 1, 0.01);
 
   auto chromosome = make_tuple(gd, gc, gcl);
   using Chrom = decltype(chromosome);
-  function<double(Chrom)> evaluate = [](Chrom chrom) {
+  function<Real(Chrom)> evaluate = [](Chrom chrom) {
     return get<1>(chrom).values_[0];
   };
-  double learning_rate = 1.5;
+  Real learning_rate = 1.5;
   auto individual = Individual<Chrom>(chromosome, evaluate, learning_rate);
 
   auto ind(individual);
@@ -159,14 +163,14 @@ TEST(Individual, Crossover) {
   parent_1.Realize();
   parent_2.Realize();
   
-  double p11 = 0.2;
-  double p21 = 0.3;
+  Real p11 = 0.2;
+  Real p21 = 0.3;
   get<1>(ind.chromosome_).values_[0] = 0;
   get<1>(parent_1.chromosome_).values_[0] = p11;
   get<1>(parent_2.chromosome_).values_[0] = p21;
 
-  double p12 = 0.5;
-  double p22 = 1.0;
+  Real p12 = 0.5;
+  Real p22 = 1.0;
   get<2>(ind.chromosome_).values_[0] = 0.1;
   get<2>(parent_1.chromosome_).values_[0] = p12;
   get<2>(parent_2.chromosome_).values_[0] = p22;
@@ -203,8 +207,8 @@ TEST(Individual, Crossover) {
   // cout << get<2>(parent_2.chromosome_).values_[0] << endl;
   // cout << "----" << endl;
 
-  double i1 = learning_rate * (p21 - p11) + p11;
-  double i2 = pow(10, learning_rate * (log10(p22) - log10(p12)) + log10(p12));
+  Real i1 = learning_rate * (p21 - p11) + p11;
+  Real i2 = pow(10, learning_rate * (log10(p22) - log10(p12)) + log10(p12));
 
   EXPECT_NEAR(get<1>(ind.chromosome_).values_[0], i1, 0.1);
   EXPECT_NEAR(get<2>(ind.chromosome_).values_[0], i2, 0.1);

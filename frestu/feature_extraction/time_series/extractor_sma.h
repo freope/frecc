@@ -1,10 +1,11 @@
 #pragma once
 
 #include <Eigen/Dense>
+#include "frestu/data_type/data_type.h"
 
 namespace frestu::feature_extraction::time_series {
 
-using Int = int;
+using Int = frestu::data_type::Int;
 
 using Eigen::Dynamic;
 using Eigen::Matrix;
@@ -21,7 +22,7 @@ public:
   template <typename FnRet, typename Df>
   Matrix<FnRet, Dynamic, Dynamic> Extract(Df& df) {
     const auto ma = df.template Roll<FnRet>(
-      [](const auto& b){
+      [](const auto& b) {
         return b.mean();
       },
       window_

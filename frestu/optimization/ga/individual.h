@@ -3,13 +3,14 @@
 #include <functional>
 #include <string>
 #include <unordered_map>
+#include "frestu/data_type/data_type.h"
 #include "frestu/optimization/ga/gene/gene_abstract.h"
 #include "frestu/util/iteration/tuple/application.h"
 
 namespace frestu::optimization::ga {
 
-using Int = int;
-using Real = double;
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::function;
 using std::get;

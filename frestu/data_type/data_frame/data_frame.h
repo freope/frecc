@@ -5,10 +5,11 @@
 #include <tuple>
 #include <unordered_map>
 #include <Eigen/Dense>
+#include "frestu/data_type/data_type.h"
 
 namespace frestu::data_type::data_frame {
 
-using Int = int;
+using Int = frestu::data_type::Int;
 
 using std::get;
 using std::index_sequence;

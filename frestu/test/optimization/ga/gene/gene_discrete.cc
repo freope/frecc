@@ -1,10 +1,13 @@
 #include <iostream>
 #include <vector>
 #include "gtest/gtest.h"
+#include "frestu/data_type/data_type.h"
 #include "frestu/optimization/ga/gene/gene_discrete.h"
 #include "frestu/optimization/ga/crossover.h"
 
 namespace {
+
+using Real = frestu::data_type::Real;
 
 using std::vector;
 using std::cout;
@@ -93,7 +96,7 @@ TEST(GeneDiscrete, Crossover) {
       candidates, CrossoverUniform<vs>, true, 3, 0.01);
     gene_parent_2.Realize();
 
-    unordered_map<string, double> kwargs;
+    unordered_map<string, Real> kwargs;
     auto gene_child = GeneDiscrete<vs>(
       candidates, CrossoverUniform<vs>, true, 3, 0.01);
     gene_child.Crossover(&gene_parent_1, &gene_parent_2, kwargs);

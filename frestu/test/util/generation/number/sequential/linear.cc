@@ -1,18 +1,22 @@
 #include <iostream>
 #include <vector>
 #include "gtest/gtest.h"
+#include "frestu/data_type/data_type.h"
 #include "frestu/util/generation/number/sequential/linear.h"
 
 namespace {
+
+using Int = frestu::data_type::Int;
+using Real = frestu::data_type::Real;
 
 using std::cout;
 using std::endl;
 using std::vector;
 
-TEST(Generation, GenerateStep_int_int_int) {
+TEST(Generation, GenerateStep_Int_Int_Int) {
   using namespace frestu::util::generation::number::sequential::linear;
 
-  vector<int> vec = GenerateStep<vector<int>>(2, 10, 3);
+  vector<Int> vec = GenerateStep<vector<Int>>(2, 10, 3);
 
   // for (const auto& c : vec) {
   //     cout << c << endl;
@@ -22,10 +26,10 @@ TEST(Generation, GenerateStep_int_int_int) {
   EXPECT_EQ(vec[2], 8);
 }
 
-TEST(Generation, GenerateStep_double_double_double) {
+TEST(Generation, GenerateStep_Real_Real_Real) {
   using namespace frestu::util::generation::number::sequential::linear;
 
-  vector<double> vec = GenerateStep<vector<double>>(2.0, 10.0, 3.2);
+  vector<Real> vec = GenerateStep<vector<Real>>(2.0, 10.0, 3.2);
 
   // for (const auto& c : vec) {
   //     cout << c << endl;
@@ -35,10 +39,10 @@ TEST(Generation, GenerateStep_double_double_double) {
   EXPECT_NEAR(vec[2], 8.4, 0.1);
 }
 
-TEST(Generation, GenerateQuantity_double_double_int) {
+TEST(Generation, GenerateQuantity_Real_Real_Int) {
   using namespace frestu::util::generation::number::sequential::linear;
 
-  vector<double> vec = GenerateQuantity<vector<double>>(2.0, 10.0, 10);
+  vector<Real> vec = GenerateQuantity<vector<Real>>(2.0, 10.0, 10);
 
   EXPECT_NEAR(vec[0], 2.0, 0.1);
   EXPECT_NEAR(vec[4], 5.5, 0.1);
