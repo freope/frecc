@@ -2,7 +2,9 @@ CC = g++
 OPTIONS = -std=c++17 -Wall -I ../.. -pthread -fopenmp -lgtest_main -lgtest
 SUITES = \
 data_type/data_frame/data_frame.out \
-feature_extraction/time_series/extractor_ma_std.out \
+feature_extraction/time_series/extractor_ema.out \
+feature_extraction/time_series/extractor_sma.out \
+feature_extraction/time_series/extractor_sstd.out \
 optimization/ga/crossover.out \
 optimization/ga/individual.out \
 optimization/ga/population.out \
@@ -20,12 +22,29 @@ util/sampling.out \
 practice.out
 
 all: $(SUITES)
+
 TARGETS = \
-feature_extraction/time_series/extractor_ma_std.cc \
-../feature_extraction/time_series/extractor_ma_std.h \
+feature_extraction/time_series/extractor_ema.cc \
+../feature_extraction/time_series/extractor_ema.h \
 ../util/io/table_reader.h \
 ../util/io/table_reader.cc
-feature_extraction/time_series/extractor_ma_std.out: $(TARGETS)
+feature_extraction/time_series/extractor_ema.out: $(TARGETS)
+	$(CC) -o $@ $^ $(OPTIONS)
+
+TARGETS = \
+feature_extraction/time_series/extractor_sma.cc \
+../feature_extraction/time_series/extractor_sma.h \
+../util/io/table_reader.h \
+../util/io/table_reader.cc
+feature_extraction/time_series/extractor_sma.out: $(TARGETS)
+	$(CC) -o $@ $^ $(OPTIONS)
+
+TARGETS = \
+feature_extraction/time_series/extractor_sstd.cc \
+../feature_extraction/time_series/extractor_sstd.h \
+../util/io/table_reader.h \
+../util/io/table_reader.cc
+feature_extraction/time_series/extractor_sstd.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
@@ -167,7 +186,8 @@ util/sampling.out: $(TARGETS)
 TARGETS = \
 practice.cc \
 ../util/io/table_reader.h \
-../util/io/table_reader.cc
+../util/io/table_reader.cc \
+../data_type/data_frame/data_frame.h
 practice.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
