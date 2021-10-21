@@ -8,24 +8,12 @@ all: $(SAMPLES)
 
 TARGETS = \
 optimization/ga/floyd.cc \
-../optimization/ga/population.h \
-../optimization/ga/individual.h \
-../optimization/ga/gene/gene_discrete.h \
-../optimization/ga/crossover.h \
-../optimization/ga/selection.h \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc
 optimization/ga/floyd.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 optimization/ga/floyd_eigen.cc \
-../optimization/ga/population.h \
-../optimization/ga/individual.h \
-../optimization/ga/gene/gene_discrete.h \
-../optimization/ga/crossover.h \
-../optimization/ga/selection.h \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc
 optimization/ga/floyd_eigen.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)

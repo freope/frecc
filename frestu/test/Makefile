@@ -1,6 +1,7 @@
 CC = g++
 OPTIONS = -std=c++17 -Wall -I ../.. -pthread -fopenmp -lgtest_main -lgtest
 SUITES = \
+agent/trader/position.out \
 data_type/data_frame/data_frame.out \
 feature_extraction/time_series/extractor_ema.out \
 feature_extraction/time_series/extractor_sma.out \
@@ -24,168 +25,120 @@ practice.out
 all: $(SUITES)
 
 TARGETS = \
+agent/trader/position.cc
+agent/trader/position.out: $(TARGETS)
+	$(CC) -o $@ $^ $(OPTIONS)
+
+TARGETS = \
 feature_extraction/time_series/extractor_ema.cc \
-../feature_extraction/time_series/extractor_ema.h \
-../util/io/table_reader.h \
 ../util/io/table_reader.cc
 feature_extraction/time_series/extractor_ema.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 feature_extraction/time_series/extractor_sma.cc \
-../feature_extraction/time_series/extractor_sma.h \
-../util/io/table_reader.h \
 ../util/io/table_reader.cc
 feature_extraction/time_series/extractor_sma.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 feature_extraction/time_series/extractor_sstd.cc \
-../feature_extraction/time_series/extractor_sstd.h \
-../util/io/table_reader.h \
 ../util/io/table_reader.cc
 feature_extraction/time_series/extractor_sstd.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 data_type/data_frame/data_frame.cc \
-../data_type/data_frame/data_frame.h \
-../util/io/table_reader.h \
 ../util/io/table_reader.cc
 data_type/data_frame/data_frame.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 optimization/ga/crossover.cc \
-../optimization/ga/crossover.h \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc
 optimization/ga/crossover.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGET = \
 optimization/ga/individual.cc \
-../optimization/ga/individual.h \
-../optimization/ga/gene/gene_discrete.h \
-../optimization/ga/gene/gene_continuous.h \
-../optimization/ga/gene/gene_continuous_logscale.h \
-../optimization/ga/crossover.h \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc \
-../util/generation/number/sequential/linear.h \
-../util/generation/number/random/logscale.h \
-../util/generation/number/random/logscale.cc \
-../util/generation/number/sequential/logscale.h
+../util/generation/number/random/logscale.cc
 optimization/ga/individual.out: $(TARGET)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 optimization/ga/population.cc \
-../optimization/ga/population.h \
-../optimization/ga/individual.h \
-../optimization/ga/gene/gene_discrete.h \
-../optimization/ga/gene/gene_continuous.h \
-../optimization/ga/gene/gene_continuous_logscale.h \
-../optimization/ga/crossover.h \
-../optimization/ga/selection.h \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc \
-../util/generation/number/sequential/linear.h \
-../util/generation/number/random/logscale.h \
-../util/generation/number/random/logscale.cc \
-../util/generation/number/sequential/logscale.h
+../util/generation/number/random/logscale.cc
 optimization/ga/population.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 optimization/ga/selection.cc \
-../optimization/ga/selection.h \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc
 optimization/ga/selection.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 optimization/ga/gene/gene_discrete.cc \
-../optimization/ga/gene/gene_discrete.h \
-../util/generation/number/random/linear.h \
-../util/generation/number/random/linear.cc \
-../util/generation/number/sequential/linear.h
+../util/generation/number/random/linear.cc
 optimization/ga/gene/gene_discrete.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 optimization/ga/gene/gene_continuous.cc \
-../optimization/ga/gene/gene_continuous.h \
-../util/generation/number/random/linear.h \
-../util/generation/number/random/linear.cc \
-../util/generation/number/sequential/linear.h
+../util/generation/number/random/linear.cc
 optimization/ga/gene/gene_continuous.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 optimization/ga/gene/gene_continuous_logscale.cc \
-../optimization/ga/gene/gene_continuous_logscale.h \
-../optimization/ga/gene/gene_continuous.h \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc \
-../util/generation/number/sequential/linear.h \
-../util/generation/number/random/logscale.h \
-../util/generation/number/random/logscale.cc \
-../util/generation/number/sequential/logscale.h
+../util/generation/number/random/logscale.cc
 optimization/ga/gene/gene_continuous_logscale.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 util/generation/number/random/linear.cc \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc
 util/generation/number/random/linear.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 util/generation/number/random/logscale.cc \
-../util/generation/number/random/logscale.h \
 ../util/generation/number/random/logscale.cc
 util/generation/number/random/logscale.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
-util/generation/number/sequential/linear.cc \
-../util/generation/number/sequential/linear.h
+util/generation/number/sequential/linear.cc
 util/generation/number/sequential/linear.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
-util/generation/number/sequential/logscale.cc \
-../util/generation/number/sequential/logscale.h
+util/generation/number/sequential/logscale.cc
 util/generation/number/sequential/logscale.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 util/io/table_reader.cc \
-../util/io/table_reader.h \
 ../util/io/table_reader.cc
 util/io/table_reader.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
-util/iteration/tuple/application.cc \
-../util/iteration/tuple/application.h
+util/iteration/tuple/application.cc
 util/iteration/tuple/application.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 util/sampling.cc \
-../util/sampling.h \
-../util/generation/number/random/linear.h \
 ../util/generation/number/random/linear.cc
 util/sampling.out: $(TARGETS)
 	$(CC) -o $@ $^ $(OPTIONS)
 
 TARGETS = \
 practice.cc \
-../util/io/table_reader.h \
 ../util/io/table_reader.cc \
 ../data_type/data_frame/data_frame.h
 practice.out: $(TARGETS)
